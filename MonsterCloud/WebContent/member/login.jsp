@@ -16,8 +16,95 @@
 <link rel="stylesheet" media="( min-width:0px ) and ( max-width:700px )" href="../css/mobile.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
+	<meta name="google-signin-client_id" content="1080320778777-b210d836c99dblg2r73ku0i9qj9hs80s.apps.googleusercontent.com">
+		<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+		<meta name="google-signin-scope" content="profile email">
+		 <meta name="google-signin-client_id" content="1080320778777-b210d836c99dblg2r73ku0i9qj9hs80s.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
+
+
+
+<script>
+window.gauth ="";
+function init(){
+  console.log('init');
+  gapi.load('auth2', function() {
+    console.log('auth2');
+    //window로 사용하면서 전역변수로 선언
+    window.gauth = gapi.auth2.init({
+      client_id:'1080320778777-b210d836c99dblg2r73ku0i9qj9hs80s.apps.googleusercontent.com'
+    });
+
+    gauth.then(function(){
+      console.log('googleAuth success');
+    }, function(){
+      console.log('googleAuth fail');
+    });
+  });
+ 
+}
+</script><!-- end of init -->
+<script >
+function google_login(){
+  gauth.signIn().then(function(){
+    console.log('gauth.signIn()');
+    sendToDml("google");
+  });
+}
+</script><!-- end of google login script -->
+
+<script>
+Kakao.init('00d80e1f8e0ba72a04389239b33d10b8');
+function kakao_login() {
+	  Kakao.Auth.loginForm({
+	    success: function(authObj) {
+	      sendToDml("kakao");
+	    },
+	    fail: function(err) {
+	      alert(JSON.stringify(err));
+	    }
+	  });
+	}
+
+
+
+</script>
+
+<script>
+function sendToDml(type){
+  if(type=="google"){
+    console.log("보내자");
+    if(gauth.isSignedIn.get()){
+      profile = gauth.currentUser.get().getBasicProfile(); //프로필 정보를 가져온다.
+      document.getElementById("email").value=profile.getEmail();
+      document.getElementById("password").value="asdfasdfasdf";
+      document.getElementById("id").value=profile.getEmail();
+ /*      document.getElementById("username").value=profile.getName();
+      document.getElementById("gender").value="확인불가"; */
+      document.getElementById("gklogin_form").submit();
+      gauth.disconnect();
+    }
+  }
+  if (type=="kakao") {
+    Kakao.API.request({
+       url: '/v1/user/me',
+       success: function(res) {
+         document.getElementById("email").value=res.kaccount_email;
+         document.getElementById("password").value="asdfasdfasdf";
+         document.getElementById("id").value=res.kaccount_email;
+/*          document.getElementById("username").value=res.properties.nickname;
+         document.getElementById("gender").value=res.has_gender; */
+         document.getElementById("gklogin_form").submit();
+       },
+       fail: function(error) {
+          console.log(error);
+       }
+    });
+  }
+}
+</script>
+
 <body>
     
     <header>
@@ -48,12 +135,13 @@
         
         </ul>
     </header>
+    
     <div class="dim" ></div>
       <div id="main" class="scroll-container">
      <section class="section1"> 
     <div class="main">
     <div style="border: 1px solid gray; width:40%; heigt:50%; margin:0 auto;">
-     <form method="post" action="loginAction.jsp">
+     <form method="post" action="LoginAction.jsp?login=1">
                 <h3 style="text-align:center">로그인 화면</h3>
                 <div class="form-group">
                     <input type ="text" class="form-control" placeholder="아이디" name="userID" mexlength="20" style="width:290px;">
@@ -61,9 +149,18 @@
                 <div class="form-group">
                     <input type="password" class="form-control" placeholder="비밀번호" name="userPassword" mexlength="20" style="width:290px;">
                 </div>
+                 <button type="button" id="kloginBtn" class="modal_text" onclick="kakao_login();"/>카카오 로그인</button>
+  <button type="button" id="kloginBtn" class="modal_text" onclick="google_login();"/>구글 로그인</button>
                 <input type="submit" class="btn btn-primary form-control"  value="로그인" style="width:143px;">
-                <a href="join.jsp"><button style="width:143px;">회원가입</button></a>
-            </form>    
+               
+            </form>     <a href="./Join.jsp"><button style="width:143px;">회원가입</button></a>
+            <form id="gklogin_form" action="LoginAction.jsp?login=2" method="post">
+              <input type="hidden" id="id" name="id" >
+                <input type="hidden" id="password" name="password" value="asdf">
+                 <input type="hidden" id="email" name="email" >
+               	<input type ="hidden" class="form-control"  name="state" id="state" value="Y">
+                        
+              </form>
     <span class="wrap"></span>
     </div>
     </div>
@@ -72,8 +169,7 @@
     
 </body>
 </html>
-
-
+ <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
 
 
 
