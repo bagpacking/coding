@@ -46,15 +46,29 @@
         <ul>
 <!--         <li><a href="#a">White Paper</a></li> -->
         <li><a href="#a">FAQ</a></li>
-        <li class="join"><a href="./member/login.jsp">Sign In</a></li>
+        <%if(session.getAttribute("id") == null){
+        	%>
+        	 <li class="join"><a href="./member/login.jsp">Sign In</a></li>
+        	<%
+        	
+        }else{
+        	%>
+        	
+        	 <li class="join"><a href="./member/Logout.jsp">Log Out</a></li>
+        	<%
+        	
+        } %>
+       
         </ul>
     </header>
     <div class="dim" ></div>
       <div id="main" class="scroll-container">
      <section class="section1"> 
     <div class="main">
-      <h1 >
-  <p  style ="color: white;"class="typewrite" data-period="2000" data-type='[ "Hi, Im Lee.", "I am Creative.", "I Love Design.", "I Love to Develop." ]'>
+    <div>
+      
+    
+    </div>
     <span class="wrap"></span>
     
     </div>
@@ -63,7 +77,7 @@
     
     
   </div> -->
-
+  
   <section class="section2">
        <div class="skill">
     <h2>Skills</h2>

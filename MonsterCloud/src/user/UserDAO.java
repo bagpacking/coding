@@ -28,7 +28,7 @@ import utill.DatabaseUtil;
 
 		public int login(String id, String password) {
 
-			String SQL = "SELECT userPassword FROM USER WHERE id = ?";
+			String SQL = "SELECT password FROM USER WHERE id = ?";
 
 			try {
 

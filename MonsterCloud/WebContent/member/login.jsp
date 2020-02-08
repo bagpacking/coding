@@ -109,7 +109,7 @@ function sendToDml(type){
     
     <header>
         <div class="left">
-       <h1><!--      <a href="#a">Hdac</a> --><img src="../images/logo1.png" style="width:140px; height:86px;" href="/index.jsp"></h1>
+        <h1><!--      <a href="#a">Hdac</a> --><a href="../index.jsp"><img src="../images/logo1.png" style="width:140px; height:86px;" href=""></a></h1>
             <a href="#a" class="all">all Menu</a>
             <div class="nav">
                 <h2>Menu</h2>
@@ -136,6 +136,10 @@ function sendToDml(type){
         </ul>
     </header>
     
+    
+
+    
+    
     <div class="dim" ></div>
       <div id="main" class="scroll-container">
      <section class="section1"> 
@@ -144,10 +148,10 @@ function sendToDml(type){
      <form method="post" action="LoginAction.jsp?login=1">
                 <h3 style="text-align:center">로그인 화면</h3>
                 <div class="form-group">
-                    <input type ="text" class="form-control" placeholder="아이디" name="userID" mexlength="20" style="width:290px;">
+                    <input type ="text" class="form-control" placeholder="아이디" id="id" name="id" mexlength="20" style="width:290px;">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="비밀번호" name="userPassword" mexlength="20" style="width:290px;">
+                    <input type="password" class="form-control" placeholder="비밀번호" id="password" name="password" mexlength="20" style="width:290px;">
                 </div>
                  <button type="button" id="kloginBtn" class="modal_text" onclick="kakao_login();"/>카카오 로그인</button>
   <button type="button" id="kloginBtn" class="modal_text" onclick="google_login();"/>구글 로그인</button>

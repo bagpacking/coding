@@ -60,6 +60,7 @@
 	System.out.println(password);
 	System.out.println(Email1);
 	System.out.println(Email);
+	System.out.println(login);
 	int login_way=Integer.parseInt(login);
 
 		UserDAO userDAO = new UserDAO(); 
@@ -77,11 +78,11 @@
 		//로그인 성공
 
 		if(result == 1 || kakao == 10){
-			session.setAttribute("userID", user.getId()); 
+			session.setAttribute("id", user.getId()); 
 
 			PrintWriter script = response.getWriter();
 			%>
-		<script>location.href="main.jsp";</script>	
+		<script>location.href="../index.jsp";</script>	
 			
 			<%
 		
