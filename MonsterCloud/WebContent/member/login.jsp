@@ -77,9 +77,9 @@ function sendToDml(type){
     console.log("보내자");
     if(gauth.isSignedIn.get()){
       profile = gauth.currentUser.get().getBasicProfile(); //프로필 정보를 가져온다.
-      document.getElementById("email").value=profile.getEmail();
-      document.getElementById("password").value="asdfasdfasdf";
-      document.getElementById("id").value=profile.getEmail();
+      document.getElementById("useremail").value=profile.getEmail();
+      document.getElementById("userpassword").value="asdfasdfasdf";
+      document.getElementById("userid").value=profile.getEmail();
  /*      document.getElementById("username").value=profile.getName();
       document.getElementById("gender").value="확인불가"; */
       document.getElementById("gklogin_form").submit();
@@ -90,9 +90,9 @@ function sendToDml(type){
     Kakao.API.request({
        url: '/v1/user/me',
        success: function(res) {
-         document.getElementById("email").value=res.kaccount_email;
-         document.getElementById("password").value="asdfasdfasdf";
-         document.getElementById("id").value=res.kaccount_email;
+         document.getElementById("useremail").value=res.kaccount_email;
+         document.getElementById("userpassword").value="asdfasdfasdf";
+         document.getElementById("userid").value=res.kaccount_email;
 /*          document.getElementById("username").value=res.properties.nickname;
          document.getElementById("gender").value=res.has_gender; */
          document.getElementById("gklogin_form").submit();
@@ -148,10 +148,10 @@ function sendToDml(type){
      <form method="post" action="LoginAction.jsp?login=1">
                 <h3 style="text-align:center">로그인 화면</h3>
                 <div class="form-group">
-                    <input type ="text" class="form-control" placeholder="아이디" id="id" name="id" mexlength="20" style="width:290px;">
+                    <input type ="text" class="form-control" placeholder="아이디"  name="id" mexlength="20" style="width:290px;">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="비밀번호" id="password" name="password" mexlength="20" style="width:290px;">
+                    <input type="password" class="form-control" placeholder="비밀번호" name="password" mexlength="20" style="width:290px;">
                 </div>
                  <button type="button" id="kloginBtn" class="modal_text" onclick="kakao_login();"/>카카오 로그인</button>
   <button type="button" id="kloginBtn" class="modal_text" onclick="google_login();"/>구글 로그인</button>
@@ -159,9 +159,9 @@ function sendToDml(type){
                
             </form>     <a href="./Join.jsp"><button style="width:143px;">회원가입</button></a>
             <form id="gklogin_form" action="LoginAction.jsp?login=2" method="post">
-              <input type="hidden" id="id" name="id" >
-                <input type="hidden" id="password" name="password" value="asdf">
-                 <input type="hidden" id="email" name="email" >
+              <input type="hidden" id="userid" name="id" >
+                <input type="hidden" id="userpassword" name="password" value="asdf">
+                 <input type="hidden" id="useremail" name="email" >
                	<input type ="hidden" class="form-control"  name="state" id="state" value="Y">
                         
               </form>

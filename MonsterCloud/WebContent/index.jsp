@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta charset="utf-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, target-densitydpi=medium-dpi">	
 <meta name="format-detection" content="telephone=no">
 <title>반응형웹</title>
@@ -15,7 +16,11 @@
 <link rel="stylesheet" media="( min-width:701px ) and ( max-width:1000px )" href="css/tablet.css">
 <link rel="stylesheet" media="( min-width:0px ) and ( max-width:700px )" href="css/mobile.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+	<meta name="google-signin-client_id" content="1080320778777-b210d836c99dblg2r73ku0i9qj9hs80s.apps.googleusercontent.com">
+		<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+		<meta name="google-signin-scope" content="profile email">
 
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 </head>
@@ -29,11 +34,24 @@
                 <h2>Menu</h2>
                 <nav>
                     <ul>
-                    <li><a href="#a">Pic</a></li>
+                    <%if(session.getAttribute("id") == null) {
+                    	%>
+                  <li><a href="https://github.com/bagpacking">github</a></li>
+                    	<%
+                 
+                    }else{
+                    	
+                    	%>
+                    	          <li><a href="#a">Pic</a></li>
                     <li><a href="#a">Media</a></li>
                     <li><a href="#a">File</a></li>
                     <li><a href="https://github.com/bagpacking">github</a></li>
                     <li><a href="#a">Q&A</a></li>
+                    	
+                    	
+                    	<%
+                    }%>
+                   
                     </ul>
                 </nav>
                 <div>
@@ -45,16 +63,23 @@
         </div>
         <ul>
 <!--         <li><a href="#a">White Paper</a></li> -->
-        <li><a href="#a">FAQ</a></li>
+       
+      
+       
         <%if(session.getAttribute("id") == null){
         	%>
+        	
         	 <li class="join"><a href="./member/login.jsp">Sign In</a></li>
+        	  <li><a href="#a">FAQ</a></li>
         	<%
         	
         }else{
+        
         	%>
         	
-        	 <li class="join"><a href="./member/Logout.jsp">Log Out</a></li>
+        	<li class="join"> <a href="#a"><%out.print(session.getAttribute("id"));%></a></li>
+        	 <li><a href="./member/Logout.jsp">Log Out</a></li>
+        	   <li><a href="#a">FAQ</a></li>
         	<%
         	
         } %>
